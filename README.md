@@ -30,3 +30,9 @@
 ### Er-диаграмма сущностей системы
 
 ![use_case](./docs/img/ER-diagram.png)
+
+
+### swagger
+
+
+[Click me](https://app.swaggerhub.com/apis/Sunshine-ki/WEB/1.0.0`)

@@ -361,3 +361,4 @@ FodyWeavers.xsd
 
 lab_01/src/project/bin/*
 lab_03/src/ui/obj/*
+lab_01/src/tests/obj/*
