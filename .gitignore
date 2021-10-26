@@ -358,3 +358,5 @@ FodyWeavers.xsd
 
 */obj/*
 */bin/*
+
+lab_01/src/project/bin/*
