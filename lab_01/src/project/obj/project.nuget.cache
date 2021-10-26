@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KzYZDFGp6MnPFYllLHwU8L8w96y12/G2sJ0nVkrWUiurPdQ18+niUlW3Kt4vqFxeElFQINhKDPIrmbffm5hvBg==",
+  "dgSpecHash": "MRnmzceDi0JM/m8B9xnMBm3uKjKYmc8mfKL8q45tVRdy8HACsYhofYNdEhfDhfWDC0+gkZv11CnqyXqIFh+JGQ==",
   "success": true,
-  "projectFilePath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_01/src/project/db.csproj",
+  "projectFilePath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_01/src/project/db.csproj",
   "expectedPackageFiles": [
     "/home/lis/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/lis/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",

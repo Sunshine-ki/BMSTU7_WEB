@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/bl.csproj": {}
+    "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bl.csproj": {}
   },
   "projects": {
-    "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/bl.csproj": {
+    "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bl.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/bl.csproj",
+        "projectUniqueName": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bl.csproj",
         "projectName": "bl",
-        "projectPath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/bl.csproj",
+        "projectPath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bl.csproj",
         "packagesPath": "/home/lis/.nuget/packages/",
-        "outputPath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/obj/",
+        "outputPath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/lis/.nuget/NuGet/NuGet.Config"

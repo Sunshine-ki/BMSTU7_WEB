@@ -1514,11 +1514,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_03/src/ui/ui.csproj",
+      "projectUniqueName": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_03/src/ui/ui.csproj",
       "projectName": "ui",
-      "projectPath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_03/src/ui/ui.csproj",
+      "projectPath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_03/src/ui/ui.csproj",
       "packagesPath": "/home/lis/.nuget/packages/",
-      "outputPath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_03/src/ui/obj/",
+      "outputPath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_03/src/ui/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/lis/.nuget/NuGet/NuGet.Config"
@@ -1532,11 +1532,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/Head/Head.csproj": {
-              "projectPath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/Head/Head.csproj"
+            "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/Head/Head.csproj": {
+              "projectPath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/Head/Head.csproj"
             },
-            "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/bl.csproj": {
-              "projectPath": "/home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/bl.csproj"
+            "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bl.csproj": {
+              "projectPath": "/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bl.csproj"
             }
           }
         }

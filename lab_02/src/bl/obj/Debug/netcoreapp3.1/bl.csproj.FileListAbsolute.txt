@@ -11,3 +11,16 @@
 /home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.dll
 /home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.pdb
 /home/lis/university/github/sem_07/BMSTU7_TESTING/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.genruntimeconfig.cache
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bin/Debug/netcoreapp3.1/bl
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bin/Debug/netcoreapp3.1/bl.deps.json
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bin/Debug/netcoreapp3.1/bl.runtimeconfig.json
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bin/Debug/netcoreapp3.1/bl.runtimeconfig.dev.json
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bin/Debug/netcoreapp3.1/bl.dll
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/bin/Debug/netcoreapp3.1/bl.pdb
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.csprojAssemblyReference.cache
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.AssemblyInfoInputs.cache
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.AssemblyInfo.cs
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.csproj.CoreCompileInputs.cache
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.dll
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.pdb
+/home/lis/university/github/sem_07/BMSTU7_WEB/lab_02/src/bl/obj/Debug/netcoreapp3.1/bl.genruntimeconfig.cache
