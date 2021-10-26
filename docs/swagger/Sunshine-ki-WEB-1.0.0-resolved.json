@@ -1,0 +1,293 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PE",
+    "description": "PostgreEducation",
+    "contact": {
+      "email": "sukocheva.alis@mail.ru"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/Sunshine-ki/WEB/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "tags": [
+    {
+      "name": "tasks",
+      "description": "info about tasks"
+    },
+    {
+      "name": "registration",
+      "description": "enables registration"
+    },
+    {
+      "name": "statistics",
+      "description": "statistics about tasks"
+    }
+  ],
+  "paths": {
+    "/Tasks": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Returns a list of tasks.",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TasksList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Tasks/Task": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Returns a task by Id.",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "query",
+            "description": "Id of the task that the user wants to solve.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FactorialTask"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Submit the solution for review",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "query",
+            "description": "Id of the task that the user wants to submit the for review",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tasks_Task_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GoodSolution"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Home/Statistics": {
+      "get": {
+        "tags": [
+          "statistics"
+        ],
+        "summary": "Returns a statistics.",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Home/Registration": {
+      "post": {
+        "tags": [
+          "registration"
+        ],
+        "summary": "Register a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FactorialTask": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "example": 4
+          },
+          "Name": {
+            "type": "string",
+            "example": "Factorial"
+          },
+          "ShortDescription": {
+            "type": "string",
+            "example": "Find a factorial"
+          },
+          "DetailesDescription": {
+            "type": "string",
+            "example": "Find a factorial of ten. Don't use the built-in functions. Write it yourself!"
+          },
+          "TableName": {
+            "type": "string",
+            "example": "none"
+          },
+          "Solution": {
+            "type": "string",
+            "example": "SELECT 10!"
+          },
+          "AuthorId": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "TasksList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/FactorialTask"
+        }
+      },
+      "GoodSolution": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Well done"
+          }
+        }
+      },
+      "NewUser": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "example": "Alis"
+          },
+          "Surname": {
+            "type": "string",
+            "example": "Sukocheva"
+          },
+          "EmailAddress": {
+            "type": "string",
+            "example": "test@mail.ru"
+          },
+          "Login": {
+            "type": "string",
+            "example": "Sunshine-ki"
+          },
+          "Passord": {
+            "type": "string",
+            "example": "password123"
+          },
+          "Role": {
+            "$ref": "#/components/schemas/NewUser_Role"
+          }
+        }
+      },
+      "InfoOboutTask": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "example": 1
+          },
+          "Name": {
+            "type": "string",
+            "example": "Sum of numbers"
+          },
+          "ShortDescription": {
+            "type": "string",
+            "example": "Find columns with a certain sum of numbers"
+          },
+          "DetailedDescription": {
+            "type": "string",
+            "example": "From the test table, find all such rows where the sum of the values of a and b is 11"
+          }
+        }
+      },
+      "StatisticsList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/InfoOboutTask"
+        }
+      },
+      "Tasks_Task_body": {
+        "type": "object",
+        "properties": {
+          "solution": {
+            "type": "string",
+            "example": "SELECT 10!"
+          }
+        }
+      },
+      "NewUser_Role": {
+        "type": "object",
+        "properties": {
+          "UserType": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      }
+    }
+  }
+}
