@@ -49,6 +49,18 @@ namespace db
 			db.SaveChanges();
 		}
 
+		public void Update(int id, db.User newUser)
+		{
+			User user = db.Users.Find(id);
+			if (user != null)
+			{
+				user.Name = newUser.Name;
+				user.Surname = newUser.Surname;
+				user.Login = newUser.Login;
+				user.Password = newUser.Password;
+				user.Email = newUser.Email;
+			}
+		}
 
 		public void UpdateName(int id, string newName)
 		{

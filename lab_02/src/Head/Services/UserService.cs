@@ -87,5 +87,34 @@ namespace Head.Services
 
 			return new Head.Answer(Constants.OK, "Ok");;
 		}
+
+		public Head.Answer UpdateUser(string login, bl.User newUser)
+		{
+			var realUser = _repositoryUser.GetUserByLogin(login);
+
+			if (realUser == null)
+			{
+				return new Head.Answer((int)Constants.Errors.UserNotExist, "Пользователя с таким логином не существует");
+			}
+
+			var user = new db.User()
+			{
+				Name = String.IsNullOrEmpty(newUser.Name) ? realUser.Name : newUser.Name,
+				Surname = String.IsNullOrEmpty(newUser.Surname) ? realUser.Surname : newUser.Surname,
+				Email = String.IsNullOrEmpty(newUser.Email) ? realUser.Email : newUser.Email,
+				Login = String.IsNullOrEmpty(newUser.Login) ? realUser.Login : newUser.Login,
+				Password = String.IsNullOrEmpty(newUser.Password) ? realUser.Password : newUser.Password,
+				UserType = realUser.UserType // UserType cannot be updated
+			};
+
+			Console.WriteLine(user);
+			Console.WriteLine($"realUser.Id = {realUser.Id}");
+
+			_repositoryUser.Update(realUser.Id, user);
+			_repositoryUser.Save();
+
+			return new Head.Answer(Constants.OK, "Ok");;
+		}
+
 	}
 }

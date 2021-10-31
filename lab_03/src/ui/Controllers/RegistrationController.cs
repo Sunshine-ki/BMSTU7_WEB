@@ -47,5 +47,21 @@ namespace ui.Controllers
 			return JsonSerializer.Serialize(new ResultDTO() {Title = "You have successfully registered"}, Options.JsonOptions());
 		}
 
+		[HttpPatch("update_user{login}")]
+		public string UpdateUser(string login, [FromBody] ui.Models.User newUser)
+		{
+			Console.WriteLine(newUser);
+
+			var user = Converter.ConvertUserToBL(newUser);
+			var result =_userService.UpdateUser(login, user);
+
+			if (result.returnValue != Head.Constants.OK)
+			{
+				return JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions());
+			}
+
+			return JsonSerializer.Serialize(new ResultDTO() {Title = "Successful update"}, Options.JsonOptions());
+		}
+
 	}
 }

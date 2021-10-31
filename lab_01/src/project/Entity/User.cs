@@ -18,5 +18,11 @@ namespace db
 
 		public List<Task> Tasks { get; set; }
 		public List<CompletedTask> CompletedTasks { get; set; }
+
+
+		public override string ToString()
+		{
+			return $"Name:{Name} Surname:{Surname} Login:{Login} Email:{Email}";
+		}
 	}
 }

@@ -11,6 +11,7 @@ namespace db
 		User GetUserByLogin(string login);
 		void Add(User user);
 		void Delete(int id);
+		void Update(int id, db.User newName);
 		void UpdateName(int id, string newName);
 		void UpdateSurname(int id, string newSurname);
 		void UpdateEmail(int id, string newEmail);
