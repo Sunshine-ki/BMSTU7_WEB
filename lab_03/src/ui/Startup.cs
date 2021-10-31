@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Head;
 
@@ -34,6 +35,14 @@ namespace ui
 				options.Cookie.IsEssential = true;
 			});
 
+
+            // установка конфигурации подключения
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Home/Registration");
+                });
+				
 			services.AddControllersWithViews();
 
 			AddTransients(services);
@@ -57,7 +66,8 @@ namespace ui
 
 			app.UseRouting();
 
-			app.UseAuthorization();
+			app.UseAuthentication();    // аутентификация
+			app.UseAuthorization();     // авторизация
 
 			app.UseSession();
 

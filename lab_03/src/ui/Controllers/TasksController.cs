@@ -16,6 +16,7 @@ using bl;
 using Head;
 using ui.Helpers;
 using ui.dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ui.Controllers
 {
@@ -90,6 +91,7 @@ namespace ui.Controllers
 		}
 
 		[HttpGet("task{task_id}")] 
+		// [Authorize]
   		public string Task([FromRoute] int task_id)
 		{
 			var task = _taskService.GetTask(task_id);
@@ -100,6 +102,7 @@ namespace ui.Controllers
 
 		
 		[HttpPost("task{task_id}")]
+		// [Authorize]
 		public string Task([FromRoute] int task_id, [FromBody] ui.Models.Task userTask)
 		{
 			var userSolution = userTask.Solution;
