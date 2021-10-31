@@ -9,7 +9,7 @@ namespace ui
 {
 	public class Converter
 	{
-		public ui.Models.User ConvertUserToUI(bl.User user)
+		public static ui.Models.User ConvertUserToUI(bl.User user)
 		{
 			ui.Models.User userUI = new ui.Models.User();
 			userUI.Id = user.Id;
@@ -22,7 +22,7 @@ namespace ui
 			// userUI.CreationTime = user.CreationTime;
 			return userUI;
 		}
-		public ui.Models.Task ConvertTaskToUI(bl.Task task)
+		public static ui.Models.Task ConvertTaskToUI(bl.Task task)
 		{
 			ui.Models.Task taskUI = new ui.Models.Task();
 			taskUI.Id = task.Id;
@@ -34,6 +34,20 @@ namespace ui
 			taskUI.AuthorId = task.AuthorId;
 			return taskUI;
 		}
+
+		public static List<ui.Models.Task> ConvertTasksToUI(List<bl.Task> tasks)
+		{
+			var result = new List<ui.Models.Task>(); 
+
+			if (tasks == null) return result;
+
+			foreach (var task in tasks)
+			{
+				result.Add(ConvertTaskToUI(task));
+			}
+
+			return result;
+		}
 		// public db.CompletedTask ConvertCompletedTaskToBD(bl.CompletedTask completedTask)
 		// {
 		// 	db.CompletedTask completedtaskUI = new db.CompletedTask();
@@ -43,14 +57,14 @@ namespace ui
 		// 	return completedtaskUI;
 		// }
 
-		public bl.User ConvertUserToBL(ui.Models.User user)
+		public static bl.User ConvertUserToBL(ui.Models.User user)
 		{
 			if (user is null)
 				return null;
 			return new bl.User(user.Id, user.Name, user.Surname, user.Email, user.Login, user.Password, user.UserType);
 		}
 
-		public bl.Task ConvertTaskToBL(ui.Models.Task task)
+		public static bl.Task ConvertTaskToBL(ui.Models.Task task)
 		{
 			if (task is null)
 				return null;

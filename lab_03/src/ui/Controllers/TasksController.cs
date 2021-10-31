@@ -8,46 +8,40 @@ using Microsoft.Extensions.Logging;
 using ui.Models;
 using System.Web;
 using Microsoft.AspNetCore.Http;
+using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 using bl;
 using Head;
+using ui.Helpers;
+using ui.dto;
 
 namespace ui.Controllers
 {
 	public class TasksController : Controller
 	{
-		Head.Facade _facade;
-		ui.Converter _converter;
-		private readonly ILogger<HomeController> _logger;
+		Head.Services.TaskService _taskService;
+		private readonly ILogger<TasksController> _logger;
 
-		// public TasksController(ILogger<HomeController> logger, ILogger<Head.Facade> loggerFacade)
-		public TasksController(ILogger<HomeController> logger, Head.Facade facade)
+		public TasksController(ILogger<TasksController> logger, Head.Services.TaskService taskService)
 		{
 			_logger = logger;
-			_converter = new Converter();
-			// _facade = new Head.Facade(loggerFacade);
-			_facade = facade;
+			_taskService = taskService;
 		}
 
-		[ActionName("Index")]
-		public IActionResult Tasks()
+		[HttpGet("task_old")]
+		public IActionResult task(int taskId)
 		{
-			ViewBag.tasks = _facade.GetTasks();
-			return View();
-		}
+			// if (string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
+			// 	return Redirect("/Home/Registration");
 
-		[HttpGet]
-		public IActionResult Task(int taskId)
-		{
-			if (string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
-				return Redirect("/Home/Registration");
-
-			bl.Task taskBL = _facade.GetTask(taskId);
+			bl.Task taskBL = _taskService.GetTask(taskId);
 			if (taskBL is null)
 			{
-				return Redirect("/Tasks");
+				return Redirect("/tasks");
 			}
-			ui.Models.Task task = _converter.ConvertTaskToUI(taskBL);
+			ui.Models.Task task = Converter.ConvertTaskToUI(taskBL);
 			ViewBag.task = task;
 			ViewBag.info_text = "Решите задачу";
 			ViewBag.colors = "alert alert-success";
@@ -59,16 +53,16 @@ namespace ui.Controllers
 		{
 			Console.WriteLine($"user_solution = {userSolution} TaskId = {taskId}");
 			
-			bl.Task taskBL = _facade.GetTask(taskId);
+			bl.Task taskBL = _taskService.GetTask(taskId);
 			if (taskBL is null)
 			{
 				return Redirect("/Tasks");
 			}
 
-			ui.Models.Task task = _converter.ConvertTaskToUI(taskBL);
+			ui.Models.Task task = Converter.ConvertTaskToUI(taskBL);
 			ViewBag.task = task;
 
-			var result = _facade.CompareSolution(userSolution, taskId); 
+			var result = _taskService.CompareSolution(userSolution, taskId); 
 			
 			if (result.returnValue == Head.Constants.OK)
 			{
@@ -82,6 +76,26 @@ namespace ui.Controllers
 			}
 
 			return View();
+		}
+
+
+		//////
+		[HttpGet("tasks")] 
+		public string Index()
+		{
+			var tasks = Converter.ConvertTasksToUI(_taskService.GetTasks());
+			tasks.ForEach(task => task.Solution = "");
+			string jsonString = JsonSerializer.Serialize(tasks, Options.JsonOptions());
+			return jsonString;
+		}
+
+		[HttpGet("task{task_id}")] 
+  		public string Task([FromRoute] int task_id)
+		{
+			var task = _taskService.GetTask(task_id);
+			task.Solution = "";
+			string jsonString = JsonSerializer.Serialize(task, Options.JsonOptions());
+			return jsonString;
 		}
 	}
 }

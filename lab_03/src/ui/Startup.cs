@@ -35,18 +35,8 @@ namespace ui
 			});
 
 			services.AddControllersWithViews();
-			// services.AddTransient<Head.Facade>();
 
-			// TODO: AddTransient
-			services.AddTransient<db.IRepositoryUser, db.PostgreSQLRepositoryUser>();
-			services.AddTransient<db.IRepositoryTask, db.PostgreSQLRepositoryTask>();
-			services.AddTransient<db.IRepositoryCompletedTask, db.PostgreSQLRepositoryCompletedTask>();
-			services.AddTransient<bl.IFacade, db.ConFacade>();
-			services.AddTransient<Head.Facade>();
-
-			// public ConFacade(IRepositoryUser dbUserIn, IRepositoryTask dbTaskIn, IRepositoryCompletedTask dbCompletedTaskIn)
-			// public Facade(IFacade conFacade)
-
+			AddTransients(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +67,18 @@ namespace ui
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
+		}
+
+		private void AddTransients(IServiceCollection services)
+		{
+			services.AddTransient<db.IRepositoryUser, db.PostgreSQLRepositoryUser>();
+			services.AddTransient<db.IRepositoryTask, db.PostgreSQLRepositoryTask>();
+			services.AddTransient<db.IRepositoryCompletedTask, db.PostgreSQLRepositoryCompletedTask>();
+			services.AddTransient<bl.IFacade, db.ConFacade>();
+			services.AddTransient<Head.Facade>();
+			services.AddTransient<Head.Services.StatisticService>();
+			services.AddTransient<Head.Services.TaskService>();
+			services.AddTransient<Head.Services.UserService>();
 		}
 	}
 }

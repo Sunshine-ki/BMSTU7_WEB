@@ -17,14 +17,12 @@ namespace ui.Controllers
 	public class HomeController : Controller
 	{
 		Head.Facade _facade;
-		ui.Converter _converter;
 		private readonly ILogger<HomeController> _logger;
 
 		public HomeController(ILogger<HomeController> logger, Head.Facade facade)
 		// public HomeController(ILogger<HomeController> logger, ILogger<Head.Facade> loggerFacade)
 		{
 			_logger = logger;
-			_converter = new Converter();
 			_facade = facade;
 			// _facade = new Head.Facade(loggerFacade);
 		}
@@ -59,7 +57,7 @@ namespace ui.Controllers
 		[HttpPost]
 		public IActionResult Registration(ui.Models.User user)
 		{
-			bl.User userBL = _converter.ConvertUserToBL(user);
+			bl.User userBL = Converter.ConvertUserToBL(user);
 
 			ViewBag.user = user;
 			Head.Answer answer = _facade.AddUser(userBL);
