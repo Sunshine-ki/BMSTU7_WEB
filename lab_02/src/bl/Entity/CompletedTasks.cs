@@ -6,6 +6,11 @@ namespace bl
 {
 	public class CompletedTask
 	{
+		public CompletedTask()
+		{
+
+		}
+		
 		public CompletedTask(int id, int userId, int taskId)
 		{
 			Id = id;

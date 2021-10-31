@@ -59,15 +59,13 @@ namespace ui
 
 		public static bl.User ConvertUserToBL(ui.Models.User user)
 		{
-			if (user is null)
-				return null;
+			if (user is null) return null;
 			return new bl.User(user.Id, user.Name, user.Surname, user.Email, user.Login, user.Password, user.UserType);
 		}
 
 		public static bl.Task ConvertTaskToBL(ui.Models.Task task)
 		{
-			if (task is null)
-				return null;
+			if (task is null) return null;
 			return new bl.Task(task.Id, task.Name, task.ShortDescription, task.DetailedDescription, task.Solution, task.TableName, task.AuthorId);
 		}
 

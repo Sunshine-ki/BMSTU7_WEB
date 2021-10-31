@@ -8,7 +8,6 @@ namespace db
 {
 	public class ConFacade : bl.IFacade
 	{
-		Converter converter;
 		IRepositoryTask dbTask; // = new PostgreSQLRepositoryTask();
 		IRepositoryUser dbUser; // = new PostgreSQLRepositoryUser();
 		IRepositoryCompletedTask dbCompletedTask;// = new PostgreSQLRepositoryCompletedTask();
@@ -24,9 +23,6 @@ namespace db
 			dbUser = dbUserIn;
 			dbTask = dbTaskIn;
 			dbCompletedTask = dbCompletedTaskIn;
-			converter = new Converter();
-			// IRepositoryTask dbTask = new PostgreSQLRepositoryTask();
-
 		}
 
 		public List<bl.Task> GetTasks()
@@ -35,7 +31,7 @@ namespace db
 			List<bl.Task> result = new List<bl.Task>();
 
 			foreach (db.Task elem in tasks)
-				result.Add(converter.ConvertTaskToBL(elem));
+				result.Add(Converter.ConvertTaskToBL(elem));
 
 			return result;
 		}
@@ -45,7 +41,7 @@ namespace db
 			List<bl.User> result = new List<bl.User>();
 
 			foreach (db.User elem in users)
-				result.Add(converter.ConvertUserToBL(elem));
+				result.Add(Converter.ConvertUserToBL(elem));
 
 			return result;
 		}
@@ -55,14 +51,14 @@ namespace db
 			List<bl.CompletedTask> result = new List<bl.CompletedTask>();
 
 			foreach (db.CompletedTask elem in completedTask)
-				result.Add(converter.ConvertCompletedTaskToBL(elem));
+				result.Add(Converter.ConvertCompletedTaskToBL(elem));
 
 			return result;
 		}
 
 		public int AddTask(bl.Task task)
 		{
-			db.Task taskDB = converter.ConvertTaskToBD(task);
+			db.Task taskDB = Converter.ConvertTaskToBD(task);
 			taskDB.Id = 0;
 			dbTask.Add(taskDB);
 			dbTask.Save();
@@ -71,7 +67,7 @@ namespace db
 
 		public int AddUser(bl.User user)
 		{
-			db.User userDB = converter.ConvertUserToBD(user);
+			db.User userDB = Converter.ConvertUserToBD(user);
 			userDB.Id = 0;
 			dbUser.Add(userDB);
 			dbUser.Save();
@@ -80,7 +76,7 @@ namespace db
 
 		public int AddCompletedTask(bl.CompletedTask completedTask)
 		{
-			db.CompletedTask completedTaskDB = converter.ConvertCompletedTaskToBD(completedTask);
+			db.CompletedTask completedTaskDB = Converter.ConvertCompletedTaskToBD(completedTask);
 
 			// Проверка на то, что пользователь уже решил данную задачу.
 			CompletedTask tmp =
@@ -117,7 +113,7 @@ namespace db
 		public bl.CompletedTask GetCompletedTask(int id)
 		{
 			db.CompletedTask completedTask = dbCompletedTask.GetCompletedTask(id);
-			return converter.ConvertCompletedTaskToBL(completedTask);
+			return Converter.ConvertCompletedTaskToBL(completedTask);
 		}
 
 		public bl.Task GetTask(int id)
@@ -127,24 +123,24 @@ namespace db
 			{
 				throw new Exception("Task not found");
 			}
-			return converter.ConvertTaskToBL(task);
+			return Converter.ConvertTaskToBL(task);
 		}
 
 		public bl.User GetUser(int id)
 		{
 			db.User user = dbUser.GetUser(id);
-			return converter.ConvertUserToBL(user);
+			return Converter.ConvertUserToBL(user);
 		}
 
 		public bl.User GetUserByEmail(string email)
 		{
 			db.User user = dbUser.GetUserByEmail(email);
-			return converter.ConvertUserToBL(user);
+			return Converter.ConvertUserToBL(user);
 		}
 		public bl.User GetUserByLogin(string login)
 		{
 			db.User user = dbUser.GetUserByLogin(login);
-			return converter.ConvertUserToBL(user);
+			return Converter.ConvertUserToBL(user);
 		}
 	}
 }

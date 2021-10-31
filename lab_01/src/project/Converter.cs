@@ -7,7 +7,7 @@ namespace db
 {
 	public class Converter
 	{
-		public db.User ConvertUserToBD(bl.User user)
+		public static db.User ConvertUserToBD(bl.User user)
 		{
 			db.User userDB = new db.User();
 			userDB.Id = user.Id;
@@ -20,7 +20,7 @@ namespace db
 			// userDB.CreationTime = user.CreationTime;
 			return userDB;
 		}
-		public db.Task ConvertTaskToBD(bl.Task task)
+		public static db.Task ConvertTaskToBD(bl.Task task)
 		{
 			db.Task taskDB = new db.Task();
 			taskDB.Id = task.Id;
@@ -32,7 +32,7 @@ namespace db
 			taskDB.AuthorId = task.AuthorId;
 			return taskDB;
 		}
-		public db.CompletedTask ConvertCompletedTaskToBD(bl.CompletedTask completedTask)
+		public static db.CompletedTask ConvertCompletedTaskToBD(bl.CompletedTask completedTask)
 		{
 			db.CompletedTask completedTaskDB = new db.CompletedTask();
 			completedTaskDB.Id = completedTask.Id;
@@ -41,23 +41,23 @@ namespace db
 			return completedTaskDB;
 		}
 
-		public bl.User ConvertUserToBL(db.User user)
+		public static bl.User ConvertUserToBL(db.User user)
 		{
-			if (user is null)
-				return null;
+			if (user is null) return null;
+
 			return new bl.User(user.Id, user.Name, user.Surname, user.Email, user.Login, user.Password, user.UserType);
 		}
-		public bl.Task ConvertTaskToBL(db.Task task)
+		public static bl.Task ConvertTaskToBL(db.Task task)
 		{
-			if (task is null)
-				return null;
+			if (task is null) return null;
+
 			return new bl.Task(task.Id, task.Name, task.ShortDescription, task.DetailedDescription, task.Solution, task.TableName, task.AuthorId);
 		}
 
-		public bl.CompletedTask ConvertCompletedTaskToBL(db.CompletedTask completedTask)
+		public static bl.CompletedTask ConvertCompletedTaskToBL(db.CompletedTask completedTask)
 		{
-			if (completedTask is null)
-				return null;
+			if (completedTask is null) return null;
+
 			return new bl.CompletedTask(completedTask.Id, completedTask.UserId, completedTask.TaskId);
 		}
 	}

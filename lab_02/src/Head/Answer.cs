@@ -6,7 +6,7 @@ using db;
 
 namespace Head
 {
-	public struct Answer
+	public class Answer
 	{
 		public Answer(int return_Value, string msg)
 		{

@@ -48,8 +48,8 @@ namespace ui.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public IActionResult Task(string userSolution, int taskId)
+		[HttpPost("task_old")]
+		public IActionResult TaskOld(string userSolution, int taskId)
 		{
 			Console.WriteLine($"user_solution = {userSolution} TaskId = {taskId}");
 			
@@ -96,6 +96,28 @@ namespace ui.Controllers
 			task.Solution = "";
 			string jsonString = JsonSerializer.Serialize(task, Options.JsonOptions());
 			return jsonString;
+		}
+
+		
+		[HttpPost("task{task_id}")]
+		public string Task([FromRoute] int task_id, [FromBody] ui.Models.Task userTask)
+		{
+			var userSolution = userTask.Solution;
+
+			bl.Task taskBL = _taskService.GetTask(task_id);
+			if (taskBL is null)
+			{
+				return JsonSerializer.Serialize(new ResultDTO() {Title = "task is not exists"}, Options.JsonOptions());
+			}
+
+			var result = _taskService.CompareSolution(userSolution, task_id); 
+			
+			if (result.returnValue == Head.Constants.OK)
+			{
+				return JsonSerializer.Serialize(new ResultDTO() {Title = "Well done"}, Options.JsonOptions());
+			}
+
+			return JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions());
 		}
 	}
 }

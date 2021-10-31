@@ -8,10 +8,8 @@ namespace db
 {
 	public class MySQLFacade : bl.IFacade
 	{
-		Converter converter;
 		public MySQLFacade()
 		{
-			converter = new Converter();
 		}
 
 		public List<bl.Task> GetTasks()
@@ -22,7 +20,7 @@ namespace db
 			List<bl.Task> result = new List<bl.Task>();
 
 			foreach (db.Task elem in tasks)
-				result.Add(converter.ConvertTaskToBL(elem));
+				result.Add(Converter.ConvertTaskToBL(elem));
 
 			return result;
 		}
@@ -34,7 +32,7 @@ namespace db
 			List<bl.User> result = new List<bl.User>();
 
 			foreach (db.User elem in users)
-				result.Add(converter.ConvertUserToBL(elem));
+				result.Add(Converter.ConvertUserToBL(elem));
 
 			return result;
 		}
@@ -46,7 +44,7 @@ namespace db
 			List<bl.CompletedTask> result = new List<bl.CompletedTask>();
 
 			foreach (db.CompletedTask elem in completedTask)
-				result.Add(converter.ConvertCompletedTaskToBL(elem));
+				result.Add(Converter.ConvertCompletedTaskToBL(elem));
 
 			return result;
 		}
@@ -54,7 +52,7 @@ namespace db
 		public int AddTask(bl.Task task)
 		{
 			IRepositoryTask db = new MySQLRepositoryTask();
-			db.Task taskDB = converter.ConvertTaskToBD(task);
+			db.Task taskDB = Converter.ConvertTaskToBD(task);
 			taskDB.Id = 0;
 			db.Add(taskDB);
 			db.Save();
@@ -64,7 +62,7 @@ namespace db
 		public int AddUser(bl.User user)
 		{
 			IRepositoryUser db = new MySQLRepositoryUser();
-			db.User userDB = converter.ConvertUserToBD(user);
+			db.User userDB = Converter.ConvertUserToBD(user);
 			userDB.Id = 0;
 			db.Add(userDB);
 			db.Save();
@@ -74,7 +72,7 @@ namespace db
 		public int AddCompletedTask(bl.CompletedTask completedTask)
 		{
 			IRepositoryCompletedTask db = new MySQLRepositoryCompletedTask();
-			db.CompletedTask completedTaskDB = converter.ConvertCompletedTaskToBD(completedTask);
+			db.CompletedTask completedTaskDB = Converter.ConvertCompletedTaskToBD(completedTask);
 
 			// Проверка на то, что пользователь уже решил данную задачу.
 			CompletedTask tmp =
@@ -111,34 +109,34 @@ namespace db
 		{
 			IRepositoryCompletedTask db = new MySQLRepositoryCompletedTask();
 			db.CompletedTask completedTask = db.GetCompletedTask(id);
-			return converter.ConvertCompletedTaskToBL(completedTask);
+			return Converter.ConvertCompletedTaskToBL(completedTask);
 		}
 
 		public bl.Task GetTask(int id)
 		{
 			IRepositoryTask db = new MySQLRepositoryTask();
 			db.Task task = db.GetTask(id);
-			return converter.ConvertTaskToBL(task);
+			return Converter.ConvertTaskToBL(task);
 		}
 
 		public bl.User GetUser(int id)
 		{
 			IRepositoryUser db = new MySQLRepositoryUser();
 			db.User user = db.GetUser(id);
-			return converter.ConvertUserToBL(user);
+			return Converter.ConvertUserToBL(user);
 		}
 
 		public bl.User GetUserByEmail(string email)
 		{
 			IRepositoryUser db = new MySQLRepositoryUser();
 			db.User user = db.GetUserByEmail(email);
-			return converter.ConvertUserToBL(user);
+			return Converter.ConvertUserToBL(user);
 		}
 		public bl.User GetUserByLogin(string login)
 		{
 			IRepositoryUser db = new MySQLRepositoryUser();
 			db.User user = db.GetUserByLogin(login);
-			return converter.ConvertUserToBL(user);
+			return Converter.ConvertUserToBL(user);
 		}
 
 
