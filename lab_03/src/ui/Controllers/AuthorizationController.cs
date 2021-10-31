@@ -29,7 +29,7 @@ namespace ui.Controllers
 		}
 
 		[HttpPost]
-		[Route("log_in")]
+		[Route("login")]
 		public ActionResult<string> Authorization([FromBody] ui.Models.User user)
 		{
 			// TODO: Авторизация
@@ -39,11 +39,22 @@ namespace ui.Controllers
 			if (result.returnValue != Head.Constants.OK)
 			{
 				// TODO: код возврата ?
+				// https://httpstatuses.com/
+		        this.HttpContext.Response.StatusCode = 418;
 				return JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions());
 			}
 			
-			// TODO: код возврата ?
 			return JsonSerializer.Serialize(new ResultDTO() {Title = "Успешная авторизация"}, Options.JsonOptions());
 		}
+
+
+		[HttpGet]
+		[Route("login")]
+		public ActionResult<string> Authorization()
+		{
+			return "Please, login";
+		}
+
+
 	}
 }

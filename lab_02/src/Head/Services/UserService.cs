@@ -33,7 +33,7 @@ namespace Head.Services
 		private Head.Answer IsUserExist(bl.User user)
 		{
 			var userOld = Converter.ConvertUserToBL(_repositoryUser.GetUserByEmail(user.Email));
-			Console.WriteLine(userOld == null);
+			
 			if (userOld != null)
 			{
 				return new Head.Answer((int)Constants.Errors.EmailUserExists, "Данный email занят");
@@ -79,9 +79,6 @@ namespace Head.Services
 			}
 
 			var oldUser = Converter.ConvertUserToBL(realUser);
-
-			Console.WriteLine($"user.Password = {user.Password}");
-			Console.WriteLine($"realUser.Login = {oldUser.Login}");
 
 			if (!oldUser.Password.Equals(user.Password))
 			{

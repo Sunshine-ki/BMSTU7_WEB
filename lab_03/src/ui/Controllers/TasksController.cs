@@ -82,6 +82,7 @@ namespace ui.Controllers
 
 		//////
 		[HttpGet("tasks")] 
+		// [Authorize]
 		public string Index()
 		{
 			var tasks = Converter.ConvertTasksToUI(_taskService.GetTasks());
@@ -110,6 +111,8 @@ namespace ui.Controllers
 			bl.Task taskBL = _taskService.GetTask(task_id);
 			if (taskBL is null)
 			{
+				// https://httpstatuses.com/
+		        this.HttpContext.Response.StatusCode = 418; 
 				return JsonSerializer.Serialize(new ResultDTO() {Title = "task is not exists"}, Options.JsonOptions());
 			}
 

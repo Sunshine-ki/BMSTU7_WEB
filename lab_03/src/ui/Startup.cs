@@ -40,10 +40,13 @@ namespace ui
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Home/Registration");
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
                 });
 				
 			services.AddControllersWithViews();
+
+			// https://localhost:5001/swagger/index.html
+		    services.AddSwaggerGen();
 
 			AddTransients(services);
 		}
@@ -71,12 +74,29 @@ namespace ui
 
 			app.UseSession();
 
+			// Enable middleware to serve generated Swagger as a JSON endpoint.
+			app.UseSwagger();
+
+			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
+			app.UseSwaggerUI();
+
+			// app.UseRouting();
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllerRoute(
-					name: "default",
-					pattern: "{controller=Home}/{action=Index}/{id?}");
+				endpoints.MapControllers();
+				// If you want check old route
+				// endpoints.MapControllerRoute(
+				// 	name: "default",
+				// 	pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
+			
+
+			// app.UseEndpoints(endpoints =>
+			// {
+			// 	endpoints.MapControllerRoute(
+			// 		name: "default",
+			// 		pattern: "{controller=Home}/{action=Index}/{id?}");
+			// });
 		}
 
 		private void AddTransients(IServiceCollection services)
