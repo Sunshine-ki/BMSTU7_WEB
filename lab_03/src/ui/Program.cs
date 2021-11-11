@@ -11,6 +11,7 @@ namespace ui
 {
     public class Program
     {
+        //  dotnet run --urls http://localhost:5004
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

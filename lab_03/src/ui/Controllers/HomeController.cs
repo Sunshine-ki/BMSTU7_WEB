@@ -35,6 +35,7 @@ namespace ui.Controllers
 			return Redirect("/Tasks");
 		}
 
+		[HttpGet("Home/Welcome")]
 		public IActionResult Welcome()
 		{
 			return View();
@@ -46,7 +47,7 @@ namespace ui.Controllers
 			return View();
 		}
 
-		[HttpGet]
+		[HttpGet("Home/Registration")]
 		public IActionResult Registration()
 		{
 			ViewBag.Msg = "Заполните все поля";
@@ -55,7 +56,7 @@ namespace ui.Controllers
 			return View();
 		}
 
-		[HttpPost]
+		[HttpPost("Home/Registration")]
 		public IActionResult Registration(ui.Models.User user)
 		{
 			bl.User userBL = Converter.ConvertUserToBL(user);
