@@ -38,6 +38,11 @@
 [Click me](https://app.swaggerhub.com/apis/Sunshine-ki/WEB/1.0.0)
 
 
+### Figma
+
+[Click me](https://www.figma.com/file/UCTIiw26m0M98zIjS76zjg/SE?node-id=0%3A1)
+
+
 ### Moodboard
 
 [Click me](https://www.pinterest.ru/sukochevaalis/se-web/)
