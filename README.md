@@ -36,3 +36,8 @@
 
 
 [Click me](https://app.swaggerhub.com/apis/Sunshine-ki/WEB/1.0.0)
+
+
+### Moodboard
+
+[Click me](https://www.pinterest.ru/sukochevaalis/se-web/)
