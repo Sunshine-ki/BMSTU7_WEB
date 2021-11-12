@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Head;
+using Microsoft.OpenApi.Models;
 
 namespace ui
 {
@@ -36,12 +37,12 @@ namespace ui
 			});
 
 
-            // установка конфигурации подключения
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => //CookieAuthenticationOptions
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
-                });
+            // // установка конфигурации подключения
+            // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //     .AddCookie(options => //CookieAuthenticationOptions
+            //     {
+            //         options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+            //     });
 				
 			services.AddControllersWithViews();
 
@@ -75,9 +76,26 @@ namespace ui
 			app.UseSession();
 
 			// Enable middleware to serve generated Swagger as a JSON endpoint.
-			app.UseSwagger();
+			// app.UseSwagger();
 
-			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
+			// app.UseSwagger(c => c.RouteTemplate = "api/v1");
+
+			// // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
+			// app.UseSwaggerUI(c =>
+			// {
+			// 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+			// 	c.RoutePrefix = "docs";
+			// });
+
+			app.UseSwagger(c =>
+				{
+					c.RouteTemplate = "swagger/{documentName}/swagger.json";
+					c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+					{
+						swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://localhost/api/v1" } };
+					});
+				});
+
 			app.UseSwaggerUI();
 
 			// app.UseRouting();

@@ -10,6 +10,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.AspNetCore.Http;
+
 
 using bl;
 using ui.dto;
@@ -32,18 +34,17 @@ namespace ui.Controllers
 		[Route("login")]
 		public ActionResult<string> Authorization([FromBody] ui.Models.User user)
 		{
-			// TODO: Авторизация
 			var result = _userService.LogIn(Converter.ConvertUserToBL(user));
 			Console.WriteLine(result.Msg);
 
 			if (result.returnValue != Head.Constants.OK)
 			{
-				// TODO: код возврата ?
 				// https://httpstatuses.com/
 		        this.HttpContext.Response.StatusCode = 418;
 				return JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions());
 			}
 			
+			HttpContext.Session.SetString("id", Convert.ToString(user.Id));
 			return JsonSerializer.Serialize(new ResultDTO() {Title = "Успешная авторизация"}, Options.JsonOptions());
 		}
 

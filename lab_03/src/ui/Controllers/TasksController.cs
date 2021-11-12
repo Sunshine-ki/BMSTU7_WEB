@@ -82,7 +82,6 @@ namespace ui.Controllers
 
 		//////
 		[HttpGet("tasks")] 
-		// [Authorize]
 		public string Index()
 		{
 			var tasks = Converter.ConvertTasksToUI(_taskService.GetTasks());
@@ -92,7 +91,6 @@ namespace ui.Controllers
 		}
 
 		[HttpGet("task{task_id}")] 
-		// [Authorize]
   		public string Task([FromRoute] int task_id)
 		{
 			var task = _taskService.GetTask(task_id);
@@ -103,9 +101,13 @@ namespace ui.Controllers
 
 		
 		[HttpPost("task{task_id}")]
-		// [Authorize]
 		public string Task([FromRoute] int task_id, [FromBody] ui.Models.Task userTask)
 		{
+			if (string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
+			{
+				return JsonSerializer.Serialize(new ResultDTO() {Title = "Not authorized"}, Options.JsonOptions());
+			}
+			
 			var userSolution = userTask.Solution;
 
 			bl.Task taskBL = _taskService.GetTask(task_id);

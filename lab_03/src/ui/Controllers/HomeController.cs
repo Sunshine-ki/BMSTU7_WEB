@@ -41,6 +41,14 @@ namespace ui.Controllers
 			return View();
 		}
 
+		// [HttpGet("Home/test_cache")]
+		// public string TestCache()
+		// {
+		// 	var msg = "Home/test_cache";
+		// 	Console.WriteLine(msg);
+		// 	return msg;
+		// }
+
 		public IActionResult Statistics()
 		{
 			ViewBag.Tasks = _facade.GetTasks();

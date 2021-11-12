@@ -43,6 +43,7 @@ namespace ui.Controllers
 			}
 			
 			Console.WriteLine("Ok");
+			HttpContext.Session.SetString("id", Convert.ToString(newUser.Id));
 
 			return JsonSerializer.Serialize(new ResultDTO() {Title = "You have successfully registered"}, Options.JsonOptions());
 		}
