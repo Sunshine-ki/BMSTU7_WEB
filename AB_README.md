@@ -62,8 +62,12 @@ Percentage of the requests served within a certain time (ms)
 ```
 
 _________________________________
+
 ```
 ab -n 100000 -c 150 http://localhost/api/v1/statistic
+```
+
+```
 This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
