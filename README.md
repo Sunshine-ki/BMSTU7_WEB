@@ -29,7 +29,7 @@
 
 ### Er-диаграмма сущностей системы
 
-![use_case](./docs/img/ER-diagram.png)
+![use_case](./docs/img/ER-diagram.jpeg)
 
 
 ### swagger
