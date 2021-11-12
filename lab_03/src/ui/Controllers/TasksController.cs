@@ -31,55 +31,6 @@ namespace ui.Controllers
 			_taskService = taskService;
 		}
 
-		[HttpGet("task_old")]
-		public IActionResult task(int taskId)
-		{
-			// if (string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
-			// 	return Redirect("/Home/Registration");
-
-			bl.Task taskBL = _taskService.GetTask(taskId);
-			if (taskBL is null)
-			{
-				return Redirect("/tasks");
-			}
-			ui.Models.Task task = Converter.ConvertTaskToUI(taskBL);
-			ViewBag.task = task;
-			ViewBag.info_text = "Решите задачу";
-			ViewBag.colors = "alert alert-success";
-			return View();
-		}
-
-		[HttpPost("task_old")]
-		public IActionResult TaskOld(string userSolution, int taskId)
-		{
-			Console.WriteLine($"user_solution = {userSolution} TaskId = {taskId}");
-			
-			bl.Task taskBL = _taskService.GetTask(taskId);
-			if (taskBL is null)
-			{
-				return Redirect("/Tasks");
-			}
-
-			ui.Models.Task task = Converter.ConvertTaskToUI(taskBL);
-			ViewBag.task = task;
-
-			var result = _taskService.CompareSolution(userSolution, taskId); 
-			
-			if (result.returnValue == Head.Constants.OK)
-			{
-				ViewBag.info_text = "Задача решена!";
-				ViewBag.colors = "alert alert-success";
-			}
-			else 
-			{
-				ViewBag.info_text = result.Msg;
-				ViewBag.colors = "alert alert-danger";
-			}
-
-			return View();
-		}
-
-
 		//////
 		[HttpGet("tasks")] 
 		public string Index()
