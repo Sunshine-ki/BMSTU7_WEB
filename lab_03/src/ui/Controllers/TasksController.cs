@@ -33,28 +33,42 @@ namespace ui.Controllers
 
 		//////
 		[HttpGet("tasks")] 
-		public string Index()
+		public IActionResult Index()
 		{
 			var tasks = Converter.ConvertTasksToUI(_taskService.GetTasks());
 			tasks.ForEach(task => task.Solution = "");
 			string jsonString = JsonSerializer.Serialize(tasks, Options.JsonOptions());
-			return jsonString;
+			return new ContentResult
+			{
+				Content = jsonString,
+				ContentType = "application/json",
+				StatusCode = 200
+			};
 		}
 
-		[HttpGet("task{task_id}")] 
-  		public string Task([FromRoute] int task_id)
+		[HttpGet("task/{task_id}")] 
+  		public IActionResult Task([FromRoute] int task_id)
 		{
 			var task = _taskService.GetTask(task_id);
 			task.Solution = "";
 			string jsonString = JsonSerializer.Serialize(task, Options.JsonOptions());
-			return jsonString;
+
+			return new ContentResult
+			{
+				Content = jsonString,
+				ContentType = "application/json",
+				StatusCode = 200
+			};
 		}
 
 		
-		[HttpPost("task{task_id}")]
+		[HttpPost("task/{task_id}")]
 		public string Task([FromRoute] int task_id, [FromBody] ui.Models.Task userTask)
 		{
-			if (string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
+			Console.WriteLine("Post for task");
+			var id = HttpContext.Session.GetString("id");
+			Console.WriteLine($"id = {id}");
+			if (string.IsNullOrEmpty(id))
 			{
 				return JsonSerializer.Serialize(new ResultDTO() {Title = "Not authorized"}, Options.JsonOptions());
 			}

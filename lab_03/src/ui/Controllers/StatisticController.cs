@@ -28,13 +28,20 @@ namespace ui.Controllers
 			_service = service;
 		}
 
-		[HttpGet("statistic")]
-		public string Index()
+		[HttpGet("statistics")]
+		public IActionResult index()
 		{
+			Console.WriteLine("statistics");
 			var tasks = Converter.ConvertTasksToUI(_service.GetStatistic());
 			tasks.ForEach(task => task.Solution = "");
 			string jsonString = JsonSerializer.Serialize(tasks, Options.JsonOptions());
-			return jsonString;
+			
+			return new ContentResult
+			{
+				Content = jsonString,
+				ContentType = "application/json",
+				StatusCode = 200
+			};
 		}
 
 	}

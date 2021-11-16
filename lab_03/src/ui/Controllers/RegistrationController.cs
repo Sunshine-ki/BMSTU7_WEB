@@ -43,12 +43,15 @@ namespace ui.Controllers
 			}
 			
 			Console.WriteLine("Ok");
-			HttpContext.Session.SetString("id", Convert.ToString(newUser.Id));
+
+			var userId = _userService.GetIdByLogin(user);
+			Console.WriteLine($"{userId}");
+			HttpContext.Session.SetString("id", Convert.ToString(userId));
 
 			return JsonSerializer.Serialize(new ResultDTO() {Title = "You have successfully registered"}, Options.JsonOptions());
 		}
 
-		[HttpPatch("update_user{login}")]
+		[HttpPatch("update_user/{login}")]
 		public string UpdateUser(string login, [FromBody] ui.Models.User newUser)
 		{
 			Console.WriteLine(newUser);

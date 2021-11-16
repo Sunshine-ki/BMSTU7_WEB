@@ -31,7 +31,8 @@ namespace ui
 
 			services.AddSession(options =>
 			{
-				options.IdleTimeout = TimeSpan.FromSeconds(10);
+				// По умолчанию 20 минут
+				// options.IdleTimeout = TimeSpan.FromSeconds(10); 
 				options.Cookie.HttpOnly = true;
 				options.Cookie.IsEssential = true;
 			});
@@ -92,7 +93,7 @@ namespace ui
 					c.RouteTemplate = "swagger/{documentName}/swagger.json";
 					c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
 					{
-						swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://localhost/api/v1" } };
+						swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://localhost/api/v1/" } };
 					});
 				});
 

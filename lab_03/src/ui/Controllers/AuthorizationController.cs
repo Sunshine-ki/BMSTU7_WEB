@@ -34,6 +34,12 @@ namespace ui.Controllers
 		[Route("login")]
 		public ActionResult<string> Authorization([FromBody] ui.Models.User user)
 		{
+			var id = HttpContext.Session.GetString("id");
+			if (!string.IsNullOrEmpty(id))
+			{
+				return  JsonSerializer.Serialize(new ResultDTO() {Title = "Authorized!"}, Options.JsonOptions());
+			}
+
 			var result = _userService.LogIn(Converter.ConvertUserToBL(user));
 			Console.WriteLine(result.Msg);
 
@@ -44,10 +50,27 @@ namespace ui.Controllers
 				return JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions());
 			}
 			
-			HttpContext.Session.SetString("id", Convert.ToString(user.Id));
+			var userId = _userService.GetIdByLogin(Converter.ConvertUserToBL(user));
+			Console.WriteLine($"{userId}");
+			HttpContext.Session.SetString("id", Convert.ToString(userId));
+
 			return JsonSerializer.Serialize(new ResultDTO() {Title = "Успешная авторизация"}, Options.JsonOptions());
 		}
 
+		[HttpGet]
+		[Route("logout")]
+		public ActionResult<string> Logout()
+		{
+			var id = HttpContext.Session.GetString("id");
+			if (string.IsNullOrEmpty(id))
+			{
+				return  JsonSerializer.Serialize(new ResultDTO() {Title = "Not authorized"}, Options.JsonOptions());
+			}
+
+			Console.WriteLine($"id = {id}");
+			HttpContext.Session.Remove("id");
+			return  JsonSerializer.Serialize(new ResultDTO() {Title = "Success"}, Options.JsonOptions());
+		}
 
 		[HttpGet]
 		[Route("login")]
