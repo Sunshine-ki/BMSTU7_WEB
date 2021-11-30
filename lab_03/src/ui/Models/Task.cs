@@ -23,5 +23,6 @@ namespace ui.Models
 		public string TableName { get; set; }
 		// public DateTime CreationTime { get; set; } = DateTime.Now;
 		public int AuthorId { get; set; } // Внешний ключ.
+		public bool Resolved { get; set; } // Внешний ключ.
 	}
 }

@@ -15,11 +15,13 @@ namespace Head.Services
 		private readonly string _connectionString = "Host=localhost;Port=5432;Database=coursework_db_exec;Username=lis;Password=password";
 
 		private IRepositoryTask _repositoryTask;
+		private IRepositoryCompletedTask _repositoryCompletedTask;
 
 
-		public TaskService(IRepositoryTask repositoryTask)
+		public TaskService(IRepositoryTask repositoryTask, IRepositoryCompletedTask repositoryCompletedTask)
 		{
 			_repositoryTask = repositoryTask;
+			_repositoryCompletedTask = repositoryCompletedTask;
 		}
 
 		public bl.Task GetTask(int id)
@@ -45,6 +47,25 @@ namespace Head.Services
 
 			return result;
 		}
+
+		public List<bl.Task> GetTasks(int id)
+		{
+			var result = new List<bl.Task>();
+			var tasks = _repositoryTask.GetTasks();
+
+			if (tasks == null) return result;
+			var userTasksCompleted = _repositoryCompletedTask.GetCompletedTaskByUserId(id);
+
+			foreach (var elem in tasks)
+			{
+				result.Add(Converter.ConvertTaskToBL(elem));
+				result[result.Count - 1].Resolved = false;
+				userTasksCompleted.ForEach(t => {if (t.TaskId == result[result.Count - 1].Id) result[result.Count - 1].Resolved = true;});
+			}
+
+			return result;
+		}
+
 
 		public Head.Answer CompareSolution(string sqlUser, int taskId)
 		{
@@ -81,7 +102,17 @@ namespace Head.Services
 
 			con.Close();
 
-			return Task.CompareResults(userResult, teacherResult);
+			return Task.CompareResults(userResult, teacherResult);;
+		}
+
+		public Head.Answer AddCompitedTask(int userId, int taskId)
+		{
+			var completedTask = new bl.CompletedTask() {UserId = userId, TaskId = taskId};
+
+			_repositoryCompletedTask.Add(Converter.ConvertCompletedTaskToBD(completedTask));
+			_repositoryCompletedTask.Save();
+
+			return new Head.Answer(Constants.OK, "Added");
 		}
 
 	}

@@ -32,6 +32,7 @@ namespace ui
 			taskUI.Solution = task.Solution;
 			taskUI.TableName = task.TableName;
 			taskUI.AuthorId = task.AuthorId;
+			taskUI.Resolved = task.Resolved;
 			return taskUI;
 		}
 

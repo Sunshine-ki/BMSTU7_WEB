@@ -35,7 +35,18 @@ namespace ui.Controllers
 		[HttpGet("tasks")] 
 		public IActionResult Index()
 		{
-			var tasks = Converter.ConvertTasksToUI(_taskService.GetTasks());
+			var id = HttpContext.Session.GetString("id");
+			if (string.IsNullOrEmpty(id))
+			{
+				return new ContentResult
+				{
+					Content = JsonSerializer.Serialize(new ResultDTO() {Title = "Not authorized"}, Options.JsonOptions()),
+					ContentType = "application/json",
+					StatusCode = 200
+				};
+			}
+
+			var tasks = Converter.ConvertTasksToUI(_taskService.GetTasks(Convert.ToInt32(id)));
 			tasks.ForEach(task => task.Solution = "");
 			string jsonString = JsonSerializer.Serialize(tasks, Options.JsonOptions());
 			return new ContentResult
@@ -87,6 +98,7 @@ namespace ui.Controllers
 			
 			if (result.returnValue == Head.Constants.OK)
 			{
+				_taskService.AddCompitedTask(Convert.ToInt32(id), task_id);
 				return JsonSerializer.Serialize(new ResultDTO() {Title = "Well done"}, Options.JsonOptions());
 			}
 

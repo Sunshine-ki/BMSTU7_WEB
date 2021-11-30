@@ -69,6 +69,12 @@ namespace Head.Services
 			return new Head.Answer(Constants.OK, "Ok");
 		}
 
+		public int GetIdByLogin(bl.User user)
+		{
+			var id = _repositoryUser.GetUserByLogin(user.Login).Id;
+			return id;
+		}	
+
 		public Head.Answer LogIn(bl.User user)
 		{
 			var realUser = _repositoryUser.GetUserByLogin(user.Login);
