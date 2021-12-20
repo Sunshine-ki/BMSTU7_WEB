@@ -1,4 +1,4 @@
-import {useLayoutEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const useAuth = () => {
 
     const [authed, setAuthed] = useState(false);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         async function sendCheckResponse() {
             try {
