@@ -17,8 +17,6 @@ const useAuth = () => {
 
     useEffect(() => {
 
-
-
         async function sendCheckResponse() {
             try {
                 if (!["/stats", "/register"].includes(location.pathname)) {
@@ -30,7 +28,7 @@ const useAuth = () => {
                 if (e) {
                     const resp = (e as AxiosError).response;
                     if (resp && resp.status === 401) {
-                        navigate("/login", { replace: true });
+                        navigate("/login");
                     }
                 }
                 setAuthed(false)
@@ -39,7 +37,7 @@ const useAuth = () => {
 
         sendCheckResponse().then();
 
-    }, [location.pathname]);
+    }, [location.pathname, location.search]);
 
     return authed;
 };
