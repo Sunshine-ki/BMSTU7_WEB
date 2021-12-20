@@ -19,13 +19,6 @@ const Stats: React.FC = () => {
         }
 
         fetchInfo().then();
-
-        setStats([{
-            id: 0,
-            name: "artem",
-            count: 1,
-            author: "meh"
-        }])
     }, [])
 
     return (
@@ -35,7 +28,6 @@ const Stats: React.FC = () => {
                 <tr>
                     <th className="w-1/5 border-2 border-indigo-600 ">№</th>
                     <th className="w-2/5 border-2 border-indigo-600 ">Имя</th>
-                    <th className="w-1/5 border-2 border-indigo-600 ">Количество</th>
                     <th className="w-2/5 border-2 border-indigo-600 ">Автор</th>
                 </tr>
                 </thead>
@@ -45,8 +37,7 @@ const Stats: React.FC = () => {
                         <tr key={ e.id }>
                             <td className="border border-indigo-600 ">{ e.id }</td>
                             <td className="border border-indigo-600 ">{ e.name }</td>
-                            <td className="border border-indigo-600 ">{ e.count }</td>
-                            <td className="border border-indigo-600 ">{ e.author }</td>
+                            <td className="border border-indigo-600 ">{ e.authorId }</td>
                         </tr>
                     )
                 }) }
