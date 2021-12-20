@@ -12,9 +12,9 @@ const Register: React.FC = () => {
     return(
         <div className="container lg mx-auto register-container mt-12">
             <Formik
-                initialValues={{ email: '', password: '', name: '', surname: '' }}
+                initialValues={{ email: '', password: '', name: '', surname: '', login: '', top: '' }}
                 validate={values => {
-                    const errors = { email: "", password: '', name: '', surname: '' };
+                    const errors = { email: "", password: '', name: '', surname: '', login: '', top: '' };
                     if (!values.email) {
                         errors.email = 'Обязательно';
                     } else if (
@@ -35,14 +35,14 @@ const Register: React.FC = () => {
                         errors.surname = "Обязательно";
                     }
 
-                    if (errors.email || errors.password || errors.name || errors.surname) {
+                    if (errors.email || errors.password || errors.name || errors.surname || errors.login) {
                         return errors;
                     }
                 }}
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                     setSubmitting(true);
                     try {
-                        const res = await axios.post(`${API_URL}/registration`, { email: values.email, password: values.password, name: values.name, surname: values.surname }, { withCredentials: true });
+                        const res = await axios.post(`${API_URL}/registration`, { login: values.login, email: values.email, password: values.password, name: values.name, surname: values.surname }, { withCredentials: true });
 
                         navigate("/tasks");
                         setSubmitting(false)
@@ -50,7 +50,7 @@ const Register: React.FC = () => {
                         if (e) {
                             const resp = (e as AxiosError).response;
                             if (resp && resp.status === 418) {
-                                setErrors({email: resp.data["Title"]})
+                                setErrors({top: resp.data["Title"]})
                             }
                         }
                     }
@@ -67,6 +67,9 @@ const Register: React.FC = () => {
                       /* and other goodies */
                   }) => (
                     <form onSubmit={handleSubmit} className="flex flex-col w-4/5 md:w-2/5 mx-auto">
+
+                        <span className="text-red-500">{errors.top && touched.top && errors.top}</span>
+
 
                         <div className="flex justify-between mt-4 mb-4">
                             <label htmlFor="name">Имя: </label>
@@ -94,6 +97,21 @@ const Register: React.FC = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.surname}
+                        />
+
+                        <div className="flex justify-between mt-4 mb-4">
+                            <label htmlFor="surname">Логин: </label>
+                            <span className="text-red-500">{errors.login && touched.login && errors.login}</span>
+
+                        </div>
+                        <input
+                            id="login"
+                            type="text"
+                            name="login"
+                            className="p-4 border-blue-800 focus:outline-none border-2 h-8 transition-all"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.login}
                         />
 
                         <div className="flex justify-between mt-4 mb-4">
