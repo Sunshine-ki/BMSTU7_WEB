@@ -19,8 +19,11 @@ const useAuth = () => {
 
         async function sendCheckResponse() {
             try {
-                await axios.get(`${API_URL}/check`, { withCredentials: true });
-                setAuthed(true)
+
+                if (location.pathname !== "/stats") {
+                    await axios.get(`${API_URL}/check`, { withCredentials: true });
+                    setAuthed(true)
+                }
 
             } catch (e) {
                 if (e) {
