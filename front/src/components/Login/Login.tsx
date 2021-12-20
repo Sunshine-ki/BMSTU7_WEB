@@ -47,13 +47,15 @@ const Login: React.FC = () => {
                         return errors;
                     }
                 }}
-                onSubmit={async (values, { setSubmitting }) => {
+                onSubmit={async (values, { setSubmitting, setErrors }) => {
                     setSubmitting(true);
                     const res = await axios.post(`${API_URL}/login`, { email: values.email, password: values.password }, { withCredentials: true });
 
                     if (res.status === 200) {
                         navigate("/tasks");
                         setSubmitting(false)
+                    } else {
+                        setErrors({email: res.data["Title"]})
                     }
                 }}
             >
