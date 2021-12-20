@@ -20,6 +20,12 @@ const useAuth = () => {
         async function sendCheckResponse() {
             try {
 
+                const params = new URLSearchParams(location.search);
+
+                if (params.get("logout")) {
+                    setAuthed(false)
+                }
+
                 if (!["/stats", "/register"].includes(location.pathname)) {
                     await axios.get(`${API_URL}/check`, { withCredentials: true });
                     setAuthed(true)
