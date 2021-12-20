@@ -41,7 +41,7 @@ function App() {
                     { !authed && (
                         <>
                             <Link to="login" className="text-white hover:text-indigo-200 transition-all">Войти</Link>
-                            <Link to="register" className="text-white hover:text-indigo-200 transition-all">Решистрация</Link>
+                            <Link to="register" className="text-white hover:text-indigo-200 transition-all">Регистрация</Link>
                         </>
                     ) }
                 </nav>
