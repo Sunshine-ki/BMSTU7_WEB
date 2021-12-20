@@ -16,9 +16,10 @@ const TaskList : React.FC<TaskListProps> = (props) => {
 
             if (res.status === 200) {
 
-                if (res.data = )
+                if (Array.isArray(res.data)) {
+                    setTasks(res.data)
+                }
 
-                setTasks(res.data)
             }
         }
 
