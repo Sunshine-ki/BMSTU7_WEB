@@ -18,6 +18,7 @@ const Login: React.FC = () => {
             const params = new URLSearchParams(location.search);
             if (params.get("logout")) {
                 await axios.get(`${API_URL}/logout`, { withCredentials: true });
+                navigate("/login", { replace: true });
             }
         }
 
