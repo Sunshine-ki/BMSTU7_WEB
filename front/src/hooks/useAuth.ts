@@ -35,7 +35,7 @@ const useAuth = () => {
 
         sendCheckResponse().then();
 
-    }, [location]);
+    }, [location.pathname]);
 
     return authed;
 };
