@@ -15,24 +15,13 @@ const Task : React.FC = () => {
     const navigate = useNavigate();
 
     const [taskInfo, setTaskInfo] = useState({} as TaskProps)
+    const [title, setTitle] = useState("")
 
     const handleFullDescription = () => {
         setFullDescription(!showFullDescription);
     }
 
     useEffect(() => {
-
-        setTaskInfo({
-            "id": 1,
-            "name": "find 2",
-            "shortDescription": "Find all rows 2",
-            "detailedDescription": "Find all rows from test table",
-            "solution": "",
-            "tableName": "test",
-            done: true,
-            "authorId": 126
-        })
-
         async function fetchInfo() {
             const res = await axios.get(`${API_URL}/task/${params.id}`, { withCredentials: true });
 
@@ -50,7 +39,10 @@ const Task : React.FC = () => {
                 <title>Задание №{ params.id }</title>
             </Helmet>
             <div className="flex flex-col mx-auto text-left justify-items-start w-4/5 md:w-1/2 ">
-                <span className="mb-4">{ taskInfo.name }</span>
+                <div className="flex justify-between w-full">
+                    <span className="mb-4">{ taskInfo.name }</span>
+                    <span className="mb-4">{ title }</span>
+                </div>
                 <span className="mb-4">{ taskInfo.shortDescription }</span>
 
                 <button type="button" onClick={ handleFullDescription } className="text-left text-indigo-600">Показать полное описание</button>
@@ -66,7 +58,7 @@ const Task : React.FC = () => {
                         const res = await axios.post(`${API_URL}/task/${params.id}`, { solution: values.solution }, { withCredentials: true });
 
                         if (res.status === 200) {
-                            navigate("tasks");
+                            setTitle(res.data["Title"])
                             setSubmitting(false)
                         }
                     }}

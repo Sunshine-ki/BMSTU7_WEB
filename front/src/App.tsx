@@ -37,34 +37,7 @@ function App() {
                       <Helmet>
                           <title>Список задании</title>
                       </Helmet>
-                      <TaskList items={[{
-                          "id": 0,
-                          "name": "find",
-                          "shortDescription": "Find all rows",
-                          "detailedDescription": "Find all rows from test table",
-                          "solution": "",
-                          "tableName": "test",
-                          done: true,
-                          "authorId": 126
-                      },{
-                          "id": 1,
-                          "name": "find 2",
-                          "shortDescription": "Find all rows 2",
-                          "detailedDescription": "Find all rows from test table",
-                          "solution": "",
-                          "tableName": "test",
-                          done: false,
-                          "authorId": 126
-                      },{
-                          "id": 2,
-                          "name": "find 3",
-                          "shortDescription": "Find all rows 3",
-                          "detailedDescription": "Find all rows from test table",
-                          "solution": "",
-                          "tableName": "test",
-                          done: true,
-                          "authorId": 126
-                      }]} />
+                      <TaskList/>
                   </>
               )} />
               <Route path="login" element={(
