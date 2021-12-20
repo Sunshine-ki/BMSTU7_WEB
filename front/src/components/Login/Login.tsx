@@ -1,14 +1,30 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { Formik } from 'formik';
 
 import axios from "axios";
 import {API_URL} from "../../constants";
-import {useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 
 const Login: React.FC = () => {
 
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    useEffect(() => {
+
+        async function processLogout() {
+            const params = new URLSearchParams(location.search);
+
+            if (params.get("logout")) {
+                await axios.get(`${API_URL}/logout`, { withCredentials: true });
+            }
+        }
+
+        processLogout().then();
+
+    }, [])
 
     return(
         <div className="container lg mx-auto login-container mt-12">

@@ -33,7 +33,10 @@ function App() {
                     <Link to="Tasks" className="text-white hover:text-indigo-200 transition-all">Задачи</Link>
                     <Link to="stats" className="text-white hover:text-indigo-200 transition-all">Статистика</Link>
                     { authed && (
-                        <Link to="stats" className="text-white hover:text-indigo-200 transition-all">Выйти</Link>
+                        <Link to="login?logout" className="text-white hover:text-indigo-200 transition-all">Выйти</Link>
+                    ) }
+                    { !authed && (
+                        <Link to="stats" className="text-white hover:text-indigo-200 transition-all">Войти</Link>
                     ) }
                 </nav>
             </div>

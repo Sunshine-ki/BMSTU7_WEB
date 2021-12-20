@@ -23,7 +23,7 @@ const useAuth = () => {
                 if (e) {
                     const resp = (e as AxiosError).response;
                     if (resp && resp.status === 401) {
-                        navigate("/login");
+                        navigate("/login", { replace: true });
                     }
                 }
                 setAuthed(false)
