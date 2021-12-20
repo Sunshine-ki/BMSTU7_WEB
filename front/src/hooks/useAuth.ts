@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 import axios, { AxiosError } from "axios";
 import {API_URL} from "../constants";
+import {useLocation} from "react-router";
 
 
 const useAuth = () => {
 
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     const [authed, setAuthed] = useState(false);
 
@@ -32,7 +35,7 @@ const useAuth = () => {
 
         sendCheckResponse().then();
 
-    }, []);
+    }, [location]);
 
     return authed;
 };
