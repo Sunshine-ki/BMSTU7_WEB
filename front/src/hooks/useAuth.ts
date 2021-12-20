@@ -20,7 +20,7 @@ const useAuth = () => {
         async function sendCheckResponse() {
             try {
 
-                if (location.pathname !== "/stats") {
+                if (!["/stats", "/register"].includes(location.pathname)) {
                     await axios.get(`${API_URL}/check`, { withCredentials: true });
                     setAuthed(true)
                 }
