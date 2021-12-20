@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 
 import { Formik } from 'formik';
 
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import {API_URL} from "../../constants";
 import {useLocation, useNavigate} from "react-router";
 
@@ -49,14 +49,20 @@ const Login: React.FC = () => {
                 }}
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                     setSubmitting(true);
-                    const res = await axios.post(`${API_URL}/login`, { email: values.email, password: values.password }, { withCredentials: true });
 
-                    if (res.status === 200) {
+                    try {
+                        const res = await axios.post(`${API_URL}/login`, { email: values.email, password: values.password }, { withCredentials: true });
                         navigate("/tasks");
                         setSubmitting(false)
-                    } else {
-                        setErrors({email: res.data["Title"]})
+                    } catch (e) {
+                        if (e) {
+                            const resp = (e as AxiosError).response;
+                            if (resp && resp.status === 418) {
+                                setErrors({email: resp.data["Title"]})
+                            }
+                        }
                     }
+
                 }}
             >
                 {({
