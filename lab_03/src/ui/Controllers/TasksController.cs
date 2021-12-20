@@ -60,7 +60,7 @@ namespace ui.Controllers
 		[HttpGet("task/{task_id}")] 
   		public IActionResult Task([FromRoute] int task_id)
 		{
-			var task = _taskService.GetTask(task_id);
+			var task = Converter.ConvertTaskToUI(_taskService.GetTask(task_id));
 			task.Solution = "";
 			string jsonString = JsonSerializer.Serialize(task, Options.JsonOptions());
 

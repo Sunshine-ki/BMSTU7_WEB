@@ -80,5 +80,18 @@ namespace ui.Controllers
 		}
 
 
+		[HttpGet]
+		[Route("check_authorization")]
+		public IActionResult CheckAuthorization()
+		{
+			var id = HttpContext.Session.GetString("id");
+			if (string.IsNullOrEmpty(id))
+			{
+				return new ContentResult { StatusCode = 401 };
+			}
+
+			return new ContentResult { StatusCode = 200};
+		}
+
 	}
 }

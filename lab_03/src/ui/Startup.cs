@@ -29,6 +29,19 @@ namespace ui
 		{
 			services.AddDistributedMemoryCache();
 
+			services.AddCors(options =>
+			{
+			options.AddPolicy("mycors", builder =>
+			{
+			builder
+			.WithOrigins("http://localhost:3000")
+			.AllowCredentials()
+			.WithMethods("POST", "GET", "DELETE")
+			.AllowAnyHeader();
+			});
+
+			});
+
 			services.AddSession(options =>
 			{
 				// По умолчанию 20 минут
@@ -51,6 +64,7 @@ namespace ui
 		    services.AddSwaggerGen();
 
 			AddTransients(services);
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +80,11 @@ namespace ui
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
-			app.UseHttpsRedirection();
+		
+
+			app.UseCors("mycors");
+
+			// app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
 			app.UseRouting();
