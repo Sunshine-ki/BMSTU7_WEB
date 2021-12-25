@@ -31,7 +31,7 @@ namespace ui.Controllers
 		}
 
 		[HttpPost("registration")]
-		public string Registration([FromBody] ui.Models.User newUser)
+		public IActionResult Registration([FromBody] ui.Models.User newUser)
 		{
 			Console.WriteLine(newUser);
 			var user = Converter.ConvertUserToBL(newUser);
@@ -39,7 +39,12 @@ namespace ui.Controllers
 
 			if (result.returnValue != Head.Constants.OK)
 			{
-				return JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions());
+				return new ContentResult
+				{
+					Content = JsonSerializer.Serialize(new ResultDTO() {Title = result.Msg}, Options.JsonOptions()),
+					ContentType = "application/json",
+					StatusCode = 418
+				};
 			}
 			
 			Console.WriteLine("Ok");
@@ -48,7 +53,13 @@ namespace ui.Controllers
 			Console.WriteLine($"{userId}");
 			HttpContext.Session.SetString("id", Convert.ToString(userId));
 
-			return JsonSerializer.Serialize(new ResultDTO() {Title = "You have successfully registered"}, Options.JsonOptions());
+			return new ContentResult
+			{
+				Content = JsonSerializer.Serialize(new ResultDTO() {Title = "You have successfully registered"}, Options.JsonOptions()),
+				ContentType = "application/json",
+				StatusCode = 200
+			};
+			
 		}
 
 		[HttpPatch("update_user/{login}")]

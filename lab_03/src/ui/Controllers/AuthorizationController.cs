@@ -81,7 +81,7 @@ namespace ui.Controllers
 
 
 		[HttpGet]
-		[Route("check_authorization")]
+		[Route("check")]
 		public IActionResult CheckAuthorization()
 		{
 			var id = HttpContext.Session.GetString("id");
