@@ -18,17 +18,19 @@ const useAuth = () => {
 
     useEffect(() => {
 
-        if (!["/register"].includes(location.pathname)) {
-            Services
-                .authCheck()
-                .then(() => setAuthed(true))
-                .catch(e => {
-                    const resp = (e as AxiosError).response;
-                    if (resp && resp.status === 401) {
+        Services
+            .authCheck()
+            .then(() => setAuthed(true))
+            .catch(e => {
+                const resp = (e as AxiosError).response;
+                if (resp && resp.status === 401) {
+                    if (!["/stats", "/register"].includes(location.pathname)) {
                         navigate("/login");
                     }
-                })
-        }
+                }
+            })
+
+
 
     }, [location.pathname, location.search]);
 
