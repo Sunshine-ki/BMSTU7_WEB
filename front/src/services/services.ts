@@ -52,7 +52,7 @@ export default class Services {
     }
 
     static async logout(searchString: string): Promise<AxiosResponse> {
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(searchString);
         if (params.get("logout")) {
             return await axios.get(`${API_URL}/logout`, { withCredentials: true });
         }
