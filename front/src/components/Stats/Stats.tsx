@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {StatRowProps} from "./StatRowProps";
+import {StatRowProps} from "../../models/ui/StatRowProps";
 import axios from "axios";
 import {API_URL} from "../../constants";
 import Services from "../../services/services";
+import Mapper from "../../services/mapper";
 
 
 const Stats: React.FC = () => {
@@ -12,7 +13,7 @@ const Stats: React.FC = () => {
     useEffect(() => {
 
         Services.getStats().then(e => {
-            setStats(e);
+            setStats(Mapper.mapStats(e));
         })
 
     }, [])

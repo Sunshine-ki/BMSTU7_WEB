@@ -1,8 +1,9 @@
 import axios, {AxiosResponse} from "axios";
 import {API_URL} from "../constants";
 import {TaskProps} from "../models/ui/TaskProps";
-import {StatRowProps} from "../components/Stats/StatRowProps";
+import {StatRowProps} from "../models/ui/StatRowProps";
 import {TaskResponse} from "../models/network/TaskResponse";
+import {StatRowResponse} from "../models/network/StatRowResponse";
 
 export default class Services {
     static async getTasks(): Promise<Array<TaskResponse>> {
@@ -33,7 +34,7 @@ export default class Services {
         return await axios.post(`${API_URL}/task/${id}`, {solution: solution}, {withCredentials: true});
     }
 
-    static async getStats(): Promise<Array<StatRowProps>> {
+    static async getStats(): Promise<Array<StatRowResponse>> {
         const res = await axios.get(`${API_URL}/statistics`, {withCredentials: true});
 
         if (res.status === 200) {

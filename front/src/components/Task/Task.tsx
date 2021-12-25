@@ -7,6 +7,7 @@ import {Helmet} from "react-helmet";
 import axios from "axios";
 import {Formik} from "formik";
 import Services from "../../services/services";
+import Mapper from "../../services/mapper";
 
 const Task : React.FC = () => {
 
@@ -25,7 +26,7 @@ const Task : React.FC = () => {
     useEffect(() => {
 
         Services.getTaskInfo(params.id).then(e => {
-            setTaskInfo(e);
+            setTaskInfo(Mapper.mapTask(e));
         })
 
     }, [])
