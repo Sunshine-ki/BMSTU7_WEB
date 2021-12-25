@@ -24,6 +24,7 @@ const useAuth = () => {
             .catch(e => {
                 const resp = (e as AxiosError).response;
                 if (resp && resp.status === 401) {
+                    setAuthed(false)
                     if (!["/stats", "/register"].includes(location.pathname)) {
                         navigate("/login");
                     }
