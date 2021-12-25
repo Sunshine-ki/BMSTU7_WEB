@@ -6,6 +6,7 @@ import {Helmet} from "react-helmet";
 
 import axios from "axios";
 import {Formik} from "formik";
+import Services from "../../services/services";
 
 const Task : React.FC = () => {
 
@@ -22,15 +23,11 @@ const Task : React.FC = () => {
     }
 
     useEffect(() => {
-        async function fetchInfo() {
-            const res = await axios.get(`${API_URL}/task/${params.id}`, { withCredentials: true });
 
-            if (res.status === 200) {
-                setTaskInfo(res.data)
-            }
-        }
+        Services.getTaskInfo(params.id).then(e => {
+            setTaskInfo(e);
+        })
 
-        fetchInfo().then();
     }, [])
 
     return (
