@@ -31,7 +31,6 @@ export default class Mapper {
         return {
             id: rowResponse.id,
             name: rowResponse.name,
-            count: rowResponse.count,
             authorId: rowResponse.authorId
         }
     }
