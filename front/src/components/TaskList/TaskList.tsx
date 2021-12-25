@@ -18,7 +18,7 @@ const TaskList : React.FC = () => {
 
 
         Services.getTasks().then((e: Array<TaskResponse>) => {
-            setTasks(e.map(el => Mapper.mapTask(el)));
+            setTasks(Mapper.mapTasks(e));
         })
 
 

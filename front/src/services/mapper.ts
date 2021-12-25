@@ -4,6 +4,10 @@ import {TaskResponse} from "../models/network/TaskResponse";
 
 export default class Mapper {
 
+    static mapTasks(tasks: Array<TaskResponse>): Array<TaskProps> {
+        return tasks.map(el => Mapper.mapTask(el));
+    }
+
     static mapTask(taskResponse: TaskResponse): TaskProps {
         return {
             id: taskResponse.id,
