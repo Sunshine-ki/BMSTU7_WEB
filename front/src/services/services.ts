@@ -5,7 +5,7 @@ import {StatRowProps} from "../components/Stats/StatRowProps";
 import {TaskResponse} from "../models/network/TaskResponse";
 
 export default class Services {
-    static async getTasks(): Promise<Array<TaskProps>> {
+    static async getTasks(): Promise<Array<TaskResponse>> {
         const res = await axios.get(`${API_URL}/tasks`, { withCredentials: true });
 
         if (res.status === 200) {
