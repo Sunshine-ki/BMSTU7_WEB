@@ -4,6 +4,7 @@ import TaskItem from "./TaskItem/TaskItem";
 import {TaskProps} from "../../models/ui/TaskProps";
 import Services from "../../services/services";
 import {TaskResponse} from "../../models/network/TaskResponse";
+import Mapper from "../../services/mapper";
 
 // Логика работы с сетью в отдельный класс
 // ДТО-шки для тех моделей, которые ходят по сети и которые юзаем на фронте
@@ -17,16 +18,7 @@ const TaskList : React.FC = () => {
 
 
         Services.getTasks().then((e: Array<TaskResponse>) => {
-            setTasks(e.map(e => ({
-                id: e.id,
-                name: e.name,
-                shortDescription: e.shortDescription,
-                detailedDescription: e.detailedDescription,
-                solution: e.solution,
-                tableName: e.tableName,
-                authorId: e.authorId,
-                done: e.done,
-            })));
+            setTasks(e.map(e => Mapper.mapTask(e)));
         })
 
 
