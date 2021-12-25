@@ -52,12 +52,14 @@ const Task : React.FC = () => {
                     initialValues={{ solution: '' }}
                     onSubmit={async (values, { setSubmitting }) => {
                         setSubmitting(true);
-                        const res = await axios.post(`${API_URL}/task/${params.id}`, { solution: values.solution }, { withCredentials: true });
+
+                        const res = await Services.updateTaskSolution(values.solution);
 
                         if (res.status === 200) {
                             setTitle(res.data["Title"])
                             setSubmitting(false)
                         }
+
                     }}
                 >
                     {({

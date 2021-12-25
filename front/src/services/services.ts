@@ -26,4 +26,10 @@ export default class Services {
 
         return {} as TaskProps;
     }
+
+    static async updateTaskSolution(solution: string, id: string | undefined) {
+        const res = await axios.post(`${API_URL}/task/${id}`, { solution: solution }, { withCredentials: true });
+
+        return res;
+    }
 }
