@@ -5,6 +5,9 @@ import {TaskProps} from "./TaskProps";
 import axios from "axios";
 import {API_URL} from "../../constants";
 
+// Логика работы с сетью в отдельный класс
+// ДТО-шки для тех моделей, которые ходят по сети и которые юзаем на фронте
+
 const TaskList : React.FC = () => {
 
     const [tasks, setTasks] = useState(new Array<TaskProps>())

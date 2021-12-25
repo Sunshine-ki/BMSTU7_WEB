@@ -30,18 +30,22 @@ function App() {
 
             <div className="container flex mx-auto ">
                 <nav className="flex w-full md:w-1/2 mx-auto bg-indigo-700 h-12 items-center justify-around mb-8">
-                    { authed && (
-                        <Link to="Tasks" className="text-white hover:text-indigo-200 transition-all">Задачи</Link>
-                    )
-                    }
                     <Link to="stats" className="text-white hover:text-indigo-200 transition-all">Статистика</Link>
-                    { authed && (
-                        <Link to="login?logout=1" className="text-white hover:text-indigo-200 transition-all">Выйти</Link>
-                    ) }
+
+                    {
+                      authed && (
+                        <>
+                            <Link to="tasks" className="text-white hover:text-indigo-200 transition-all">Задачи</Link>
+                            <Link to="login?logout=1" className="text-white hover:text-indigo-200 transition-all">Выйти</Link>
+                        </>
+                        )  
+                    }
+
+
                     { !authed && (
                         <>
-                            <Link to="login" className="text-white hover:text-indigo-200 transition-all">Войти</Link>
                             <Link to="register" className="text-white hover:text-indigo-200 transition-all">Регистрация</Link>
+                            <Link to="login" className="text-white hover:text-indigo-200 transition-all">Войти</Link>
                         </>
                     ) }
                 </nav>
