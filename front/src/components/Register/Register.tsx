@@ -43,7 +43,7 @@ const Register: React.FC = () => {
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                     setSubmitting(true);
                     try {
-                        await Services.register(values.email, values.password, values.login, values.name, values.surname);
+                        await Services.register({ email: values.email, password: values.password, login: values.login, name: values.name, surname: values.surname});
                         navigate("/tasks");
                         setSubmitting(false)
                     } catch (e) {

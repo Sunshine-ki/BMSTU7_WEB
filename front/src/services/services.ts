@@ -4,6 +4,7 @@ import {TaskProps} from "../models/ui/TaskProps";
 import {StatRowProps} from "../models/ui/StatRowProps";
 import {TaskResponse} from "../models/network/TaskResponse";
 import {StatRowResponse} from "../models/network/StatRowResponse";
+import {UserRequest} from "../models/network/UserRequest";
 
 export default class Services {
     static async getTasks(): Promise<Array<TaskResponse>> {
@@ -45,12 +46,12 @@ export default class Services {
 
     }
 
-    static async login(email: string, password: string): Promise<AxiosResponse> {
-        return await axios.post(`${API_URL}/login`, { email, password }, { withCredentials: true });
+    static async login(request: UserRequest): Promise<AxiosResponse> {
+        return await axios.post(`${API_URL}/login`, { email: request.email, password: request.password }, { withCredentials: true });
     }
 
-    static async register(email: string, password: string, login: string, name: string, surname: string): Promise<AxiosResponse> {
-        return await axios.post(`${API_URL}/registration`, { email, password, login, name, surname }, { withCredentials: true });
+    static async register(request: UserRequest): Promise<AxiosResponse> {
+        return await axios.post(`${API_URL}/registration`, { email: request.email, password: request.password, login: request.login, name: request.name, surname: request.surname }, { withCredentials: true });
     }
 
     static async logout(searchString: string): Promise<AxiosResponse> {

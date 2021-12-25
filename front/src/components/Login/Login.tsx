@@ -48,7 +48,7 @@ const Login: React.FC = () => {
                     setSubmitting(true);
 
                     try {
-                        await Services.login(values.email, values.password);
+                        await Services.login({ email: values.email, password: values.password });
                         navigate("/tasks");
                         setSubmitting(false)
                     } catch (e) {
