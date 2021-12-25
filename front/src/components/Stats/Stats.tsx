@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {StatRowProps} from "./StatRowProps";
 import axios from "axios";
 import {API_URL} from "../../constants";
+import Services from "../../services/services";
 
 
 const Stats: React.FC = () => {
@@ -10,15 +11,10 @@ const Stats: React.FC = () => {
 
     useEffect(() => {
 
-        async function fetchInfo() {
-            const res = await axios.get(`${API_URL}/statistics`, { withCredentials: true });
+        Services.getStats().then(e => {
+            setStats(e);
+        })
 
-            if (res.status === 200) {
-                setStats(res.data)
-            }
-        }
-
-        fetchInfo().then();
     }, [])
 
     return (
