@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 
 import { Formik } from 'formik';
 
-import axios, {AxiosError} from "axios";
+import axios, {AxiosError, AxiosResponse} from "axios";
 import {API_URL} from "../../constants";
 import {useLocation, useNavigate} from "react-router";
 import Services from "../../services/services";
@@ -15,16 +15,11 @@ const Login: React.FC = () => {
 
     useEffect(() => {
 
-        async function processLogout() {
-            const params = new URLSearchParams(location.search);
-            if (params.get("logout")) {
-                await axios.get(`${API_URL}/logout`, { withCredentials: true });
+        Services.logout(location.search).then((e: AxiosResponse) => {
+            if (e.status === 200) {
                 navigate("/login", { replace: true });
             }
-        }
-
-        processLogout().then();
-
+        })
     }, [])
 
     return(
