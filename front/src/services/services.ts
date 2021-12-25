@@ -47,11 +47,11 @@ export default class Services {
     }
 
     static async login(request: UserRequest): Promise<AxiosResponse> {
-        return await axios.post(`${API_URL}/login`, { email: request.email, password: request.password }, { withCredentials: true });
+        return await axios.post(`${API_URL}/login`, request, { withCredentials: true });
     }
 
     static async register(request: UserRequest): Promise<AxiosResponse> {
-        return await axios.post(`${API_URL}/registration`, { email: request.email, password: request.password, login: request.login, name: request.name, surname: request.surname }, { withCredentials: true });
+        return await axios.post(`${API_URL}/registration`, request , { withCredentials: true });
     }
 
     static async logout(searchString: string): Promise<AxiosResponse> {
