@@ -53,7 +53,7 @@ const Task : React.FC = () => {
                     onSubmit={async (values, { setSubmitting }) => {
                         setSubmitting(true);
 
-                        const res = await Services.updateTaskSolution(values.solution);
+                        const res = await Services.updateTaskSolution(values.solution, params.id);
 
                         if (res.status === 200) {
                             setTitle(res.data["Title"])

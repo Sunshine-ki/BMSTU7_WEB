@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import axios, {AxiosError} from "axios";
 import {API_URL} from "../../constants";
 import {useNavigate} from "react-router";
+import Services from "../../services/services";
 
 const Register: React.FC = () => {
 
@@ -42,8 +43,7 @@ const Register: React.FC = () => {
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                     setSubmitting(true);
                     try {
-                        const res = await axios.post(`${API_URL}/registration`, { login: values.login, email: values.email, password: values.password, name: values.name, surname: values.surname }, { withCredentials: true });
-
+                        await Services.register(values.email, values.password, values.login, values.name, values.surname);
                         navigate("/tasks");
                         setSubmitting(false)
                     } catch (e) {

@@ -42,4 +42,12 @@ export default class Services {
         return [];
 
     }
+
+    static async login(email: string, password: string) {
+        return await axios.post(`${API_URL}/login`, { email, password }, { withCredentials: true });
+    }
+
+    static async register(email: string, password: string, login: string, name: string, surname: string) {
+        return await axios.post(`${API_URL}/registration`, { email, password, login, name, surname }, { withCredentials: true });
+    }
 }

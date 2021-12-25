@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import axios, {AxiosError} from "axios";
 import {API_URL} from "../../constants";
 import {useLocation, useNavigate} from "react-router";
+import Services from "../../services/services";
 
 const Login: React.FC = () => {
 
@@ -52,7 +53,7 @@ const Login: React.FC = () => {
                     setSubmitting(true);
 
                     try {
-                        const res = await axios.post(`${API_URL}/login`, { email: values.email, password: values.password }, { withCredentials: true });
+                        await Services.login(values.email, values.password);
                         navigate("/tasks");
                         setSubmitting(false)
                     } catch (e) {
