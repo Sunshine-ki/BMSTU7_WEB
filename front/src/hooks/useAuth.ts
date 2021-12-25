@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import {API_URL} from "../constants";
 import {useLocation} from "react-router";
+import Services from "../services/services";
 
 
 const useAuth = () => {
@@ -17,25 +18,17 @@ const useAuth = () => {
 
     useEffect(() => {
 
-        async function sendCheckResponse() {
-            try {
-                if (!["/stats", "/register"].includes(location.pathname)) {
-                    await axios.get(`${API_URL}/check`, { withCredentials: true });
-                    setAuthed(true)
-                }
-
-            } catch (e) {
-                if (e) {
+        if (!["/stats", "/register"].includes(location.pathname)) {
+            Services
+                .authCheck()
+                .then(() => setAuthed(true))
+                .catch(e => {
                     const resp = (e as AxiosError).response;
                     if (resp && resp.status === 401) {
                         navigate("/login");
                     }
-                }
-                setAuthed(false)
-            }
+                })
         }
-
-        sendCheckResponse().then();
 
     }, [location.pathname, location.search]);
 

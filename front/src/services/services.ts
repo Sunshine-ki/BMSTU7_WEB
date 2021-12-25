@@ -59,4 +59,8 @@ export default class Services {
 
         return {} as AxiosResponse;
     }
+
+    static async authCheck(): Promise<AxiosResponse> {
+        return await axios.get(`${API_URL}/check`, { withCredentials: true });
+    }
 }
