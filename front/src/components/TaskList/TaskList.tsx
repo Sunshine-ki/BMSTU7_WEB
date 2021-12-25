@@ -2,27 +2,19 @@ import React, {useEffect, useState} from "react";
 
 import TaskItem from "./TaskItem/TaskItem";
 import {TaskProps} from "./TaskProps";
-import axios from "axios";
-import {API_URL} from "../../constants";
+import Services from "../../services/services";
 
 const TaskList : React.FC = () => {
 
     const [tasks, setTasks] = useState(new Array<TaskProps>())
 
     useEffect(() => {
-        async function fetchTasks() {
-            const res = await axios.get(`${API_URL}/tasks`, { withCredentials: true });
 
-            if (res.status === 200) {
+        Services.getTasks().then(e => {
+            setTasks(e);
+        })
 
-                if (Array.isArray(res.data)) {
-                    setTasks(res.data)
-                }
 
-            }
-        }
-
-        fetchTasks().then();
     }, [])
 
     return (
