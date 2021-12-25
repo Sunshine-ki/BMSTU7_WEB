@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { TaskProps } from "../TaskList/TaskProps";
+import { TaskProps } from "../../models/ui/TaskProps";
 import {API_URL} from "../../constants";
 import {useNavigate, useParams} from "react-router";
 import {Helmet} from "react-helmet";

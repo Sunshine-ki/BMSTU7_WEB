@@ -1,5 +1,5 @@
 import React from "react";
-import { TaskProps } from "../TaskProps";
+import { TaskProps } from "../../../models/ui/TaskProps";
 import { useNavigate } from "react-router-dom";
 
 const TaskItem: React.FC<TaskProps> = (props) => {
